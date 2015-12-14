@@ -1,0 +1,66 @@
+// Import Flexbox Mixins
+@import "flexbox";
+
+//------------------------------------------------------------------------------
+//  Grid Defaults - 1400px Wide
+//  (12 columns * 80px) + (11 gutters * 40px) = 1440px
+//------------------------------------------------------------------------------
+
+$column-width: 100px;
+$gutter-width: 40px;
+$columns: 12;
+$max-width: 1400px;
+$total-width: 100%;
+
+
+//------------------------------------------------------------------------------
+//  Utility function — you should never need to modify this
+//------------------------------------------------------------------------------
+
+@function gridsystem-width($columns:$columns) {
+  @return ($column-width * $columns) + ($gutter-width * $columns);
+}
+
+//------------------------------------------------------------------------------
+//  Flexbox Layout
+//  Sets up flexbox container & uses @include flexcolumn(x); to apply flex-basis
+//------------------------------------------------------------------------------
+
+@mixin flexrow{
+  @include flexbox;
+  width: $total-width;
+  max-width: $max-width;
+}
+
+@mixin flexcolumn($x,$columns:$columns){
+  @include flex-basis($total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns)));
+  margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
+
+
+//------------------------------------------------------------------------------
+//  Floated Layout
+//------------------------------------------------------------------------------
+
+@mixin row{
+  @include clearfix();
+  display: block;
+  width: $total-width;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+@mixin column($x,$columns:$columns) {
+  display: inline-block;
+  float: left;
+  width: $total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns));
+  margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
+
+@mixin push($offset:1) {
+  margin-left: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
+
+@mixin pull($offset:1) {
+  margin-right: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
