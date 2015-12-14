@@ -4,9 +4,7 @@ This grid system is a combination of the Semantic Grid System and Flexbox. It wi
 
 The examples provided in this README assume you are using autoprefixer.
 
-## How to Use
-
-### The Grid System Setup
+## The Initial Setup
 Setting up the grid defaults.
 ```scss
 // Import Flexbox Mixins
@@ -22,8 +20,11 @@ $columns: 12;
 $max-width: 1400px;
 $total-width: 100%;
 ```
-### Using the Flexcolumn Mixin
-The HTML markup
+
+## The Flexbox Way
+
+### The flexcolumn(); Mixin
+HTML markup
 ```html
 <div class="container">
 	<div class="container-item"></div>
@@ -31,7 +32,7 @@ The HTML markup
 </div>
 ```
 
-The SCSS
+SCSS
 ```scss
 .container{
 	@include flexrow;
@@ -57,6 +58,61 @@ Compiled CSS
 	-ms-flex-preferred-size:31.11111%;
 	flex-basis:31.11111%;
 	margin:0 1.11111%
+}
+```
+
+## The Non-Flexbox Way
+
+### The column(); Mixin
+HTML markup
+```html
+<div class="container">
+	<div class="container-item"></div>
+	<div class="container-item"></div>
+</div>
+```
+
+SCSS
+```scss
+.container{
+	@include row;
+
+	&-item{
+		@include column(4);
+
+		&:nth-of-type(1){
+			@include push(2);
+		}
+
+		&:nth-of-type(2){
+			@include pull(2);
+		}
+	}
+}
+```
+
+Compiled CSS
+```CSS
+.portfolio{
+	display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.portfolio-item {
+  display: inline-block;
+  float: left;
+  width: 30.95238%;
+  margin: 0 1.19048%;
+}
+
+.portfolio-item:nth-of-type(1) {
+  margin-left: 17.85714%;
+}
+
+.portfolio-item:nth-of-type(2) {
+  margin-right: 17.85714%;
 }
 ```
 
