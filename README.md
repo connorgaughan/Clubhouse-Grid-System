@@ -94,7 +94,7 @@ SCSS
 Compiled CSS
 ```CSS
 .portfolio{
-	display: block;
+  display: block;
   margin: 0 auto;
   width: 100%;
   max-width: 1400px;
@@ -117,5 +117,4 @@ Compiled CSS
 ```
 
 ## Credits
-[Philip Walton](http://philipwalton.github.io/solved-by-flexbox/) for 'Solved by Flexbox.'
-[Tyler Tate](https://github.com/tylertate/semantic.gs) for 'The Semantic Grid System.'
+[Philip Walton](http://philipwalton.github.io/solved-by-flexbox/) for 'Solved by Flexbox.' and [Tyler Tate](https://github.com/tylertate/semantic.gs) for 'The Semantic Grid System.'
