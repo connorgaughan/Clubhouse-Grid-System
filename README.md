@@ -116,5 +116,8 @@ Compiled CSS
 }
 ```
 
+## Live Demo
+[Check out a live demo of this in action.](http://codepen.io/connorgaughan/full/jWWwQv/)
+
 ## Credits
 [Philip Walton](http://philipwalton.github.io/solved-by-flexbox/) for 'Solved by Flexbox.' and [Tyler Tate](https://github.com/tylertate/semantic.gs) for 'The Semantic Grid System.'
