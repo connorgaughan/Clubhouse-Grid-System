@@ -1,15 +1,16 @@
-// Import Flexbox Mixins
-@import "flexbox";
+*{
+  box-sizing: border-box;
+}
 
 //------------------------------------------------------------------------------
 //  Grid Defaults - 1400px Wide
 //  (12 columns * 80px) + (11 gutters * 40px) = 1440px
 //------------------------------------------------------------------------------
 
-$column-width: 100px;
+$column-width: 80px;
 $gutter-width: 40px;
 $columns: 12;
-$max-width: 1400px;
+$max-width: 1440px;
 $total-width: 100%;
 
 
@@ -26,41 +27,53 @@ $total-width: 100%;
 //  Sets up flexbox container & uses @include flexcolumn(x); to apply flex-basis
 //------------------------------------------------------------------------------
 
-@mixin flexrow{
-  @include flexbox;
-  width: $total-width;
-  max-width: $max-width;
-}
-
-@mixin flexcolumn($x,$columns:$columns){
-  @include flex-basis($total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns)));
-  margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
-}
-
-
-//------------------------------------------------------------------------------
-//  Floated Layout
-//------------------------------------------------------------------------------
-
 @mixin row{
-  @include clearfix();
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   width: $total-width;
   max-width: $max-width;
   margin: 0 auto;
+  padding: 20px;
 }
 
-@mixin column($x,$columns:$columns) {
-  display: inline-block;
-  float: left;
-  width: $total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns));
+@mixin column($x,$columns:$columns){
+  flex: 0 0 $total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns));
   margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
 }
 
-@mixin push($offset:1) {
-  margin-left: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
-}
 
-@mixin pull($offset:1) {
-  margin-right: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+// Sample for responsive grids
+.container{
+
+  @include row();
+
+  &-item{
+    flex: 1;
+    height: 100px;
+    background: red;
+  }
+  .left,
+  .right,
+  .another-class,
+  .a-different-class{
+    @include column(12);
+  }
+
+  @media screen and (min-width:32em){
+    .left{
+      @include column(4);
+    }
+
+    .right{
+      @include column(8);
+    }
+
+    .another-class{
+      @include column(3);
+    }
+
+    .a-different-class{
+      @include column(6);
+    }
+  }
 }

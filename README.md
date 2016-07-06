@@ -7,23 +7,19 @@ The examples provided in this README assume you are using autoprefixer.
 ## The Initial Setup
 Setting up the grid defaults.
 ```scss
-// Import Flexbox Mixins
-@import "flexbox";
-
 //------------------------------------------------------------------------------
 //  Grid Defaults - max-width of 1400px Wide
 //  (12 columns * 80px) + (11 gutters * 40px) = 1400px
 //------------------------------------------------------------------------------
-$column-width: 100px;
+
+$column-width: 80px;
 $gutter-width: 40px;
 $columns: 12;
-$max-width: 1400px;
+$max-width: 1440px;
 $total-width: 100%;
 ```
 
-## The Flexbox Way
-
-### The flexcolumn(); Mixin
+##The column(); Mixin
 HTML markup
 ```html
 <div class="container">
@@ -34,90 +30,19 @@ HTML markup
 
 SCSS
 ```scss
+// A mobile first approach
 .container{
-	@include flexrow;
-	@include justify-content(center);
+	@include row();
 
 	&-item{
-		@include flexcolumn(4);
-	}
-}
-```
+		@include column(12);
 
-Compiled CSS
-```CSS
-.portfolio{
-	display:-webkit-box;
-	display:-webkit-flex;
-	display:-moz-flex;
-	display:-ms-flexbox
-}
-
-.portfolio-item{
-	-webkit-flex-basis:31.11111%;
-	-ms-flex-preferred-size:31.11111%;
-	flex-basis:31.11111%;
-	margin:0 1.11111%
-}
-```
-
-## The Non-Flexbox Way
-
-### The column(); Mixin
-HTML markup
-```html
-<div class="container">
-	<div class="container-item"></div>
-	<div class="container-item"></div>
-</div>
-```
-
-SCSS
-```scss
-.container{
-	@include row;
-
-	&-item{
-		@include column(4);
-
-		&:nth-of-type(1){
-			@include push(2);
-		}
-
-		&:nth-of-type(2){
-			@include pull(2);
+		@media screen and (min-width:46em){
+			@include column(6);
 		}
 	}
-}
-```
-
-Compiled CSS
-```CSS
-.portfolio{
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
-}
-
-.portfolio-item {
-  display: inline-block;
-  float: left;
-  width: 30.95238%;
-  margin: 0 1.19048%;
-}
-
-.portfolio-item:nth-of-type(1) {
-  margin-left: 17.85714%;
-}
-
-.portfolio-item:nth-of-type(2) {
-  margin-right: 17.85714%;
 }
 ```
 
 ## Live Demo
 [Check out a live demo of this in action.](http://codepen.io/connorgaughan/full/jWWwQv/)
-
-## Credits
-[Philip Walton](http://philipwalton.github.io/solved-by-flexbox/) for 'Solved by Flexbox.' and [Tyler Tate](https://github.com/tylertate/semantic.gs) for 'The Semantic Grid System.'
