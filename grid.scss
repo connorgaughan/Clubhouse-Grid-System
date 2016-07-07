@@ -41,6 +41,11 @@ $total-width: 100%;
   margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
 }
 
+@mixin fixedColumn($x,$columns:$columns){
+  flex: 0 0 calc( #{$total-width*(((($gutter-width+$column-width)*$x)) / gridsystem-width($columns))} - #{$gutter-width} );
+  margin: 0 $gutter-width*.5;
+}
+
 
 // Sample for responsive grids
 .container{
